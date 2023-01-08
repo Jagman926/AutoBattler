@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 6848ff4142462924da03c0a01547ff95
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - HexTilePrefab: {fileID: 1105217370780007684, guid: 0f45edb996e1aeb4a886dad8ca9ecff0, type: 3}
+  - HexTileCoordText: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
