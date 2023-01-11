@@ -59,6 +59,6 @@ public class HexGridManager : MonoBehaviour
                 hexGrid[r,q] = hexTile;
             }
         }
-        return null;
+        return hexGrid;
     }
 }
