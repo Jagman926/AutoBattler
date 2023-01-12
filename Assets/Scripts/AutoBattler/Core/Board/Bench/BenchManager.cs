@@ -6,7 +6,7 @@ using TMPro;
 public class BenchManager : MonoBehaviour
 {
     // BenchTile
-    public GameObject BenchTilePrefab;
+    private GameObject BenchTilePrefab;
 
     // HexGrid
     private GameObject _benchArrayObject;
@@ -15,12 +15,21 @@ public class BenchManager : MonoBehaviour
     private BenchTile [] _benchArray;
     private Vector3 _benchOriginOffset;
 
-    //Debug
-    public bool EnableDebug = false;
+    public BenchManager InitBenchManager(int size)
+    {
+        Size = size;
+        return this;
+    }
+
+    void Awake()
+    {
+        BenchTilePrefab = Resources.Load("Prefabs/BenchTile") as GameObject;
+    }
 
     void Start()
     {
         _benchArray = GenerateBenchArray(Size);
+        ToggleDebug(false);
     }
 
     void Update()
@@ -44,12 +53,23 @@ public class BenchManager : MonoBehaviour
             // Set bench index
             BenchTile benchTile = benchTileObject.GetComponent<BenchTile>();
             benchTile.SetIndex(i);
-            if(EnableDebug)
-            {
-                benchTileObject.transform.Find("Canvas/IndexText").GetComponent<TMP_Text>().SetText(benchTile.GetIndex().ToString());
-            }
             benchArray[i] = benchTile;
         }
         return benchArray;
+    }
+
+    public void ToggleDebug(bool enabled)
+    {
+        foreach (var tile in _benchArray)
+        {
+            if(enabled)
+            {
+                tile.transform.Find("Canvas/IndexText").GetComponent<TMP_Text>().SetText(tile.GetIndex().ToString());
+            }
+            else
+            {
+                tile.transform.Find("Canvas/IndexText").GetComponent<TMP_Text>().SetText("");
+            }
+        }
     }
 }

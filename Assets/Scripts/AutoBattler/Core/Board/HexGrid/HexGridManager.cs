@@ -6,7 +6,7 @@ using TMPro;
 public class HexGridManager : MonoBehaviour
 {
     // HexTile
-    public GameObject HexTilePrefab;
+    private GameObject HexTilePrefab;
 
     // HexGrid
     private GameObject _hexGridObject;
@@ -16,12 +16,22 @@ public class HexGridManager : MonoBehaviour
     private HexTile [,] _hexGridArray;
     private Vector3 _hexGridOriginOffset;
 
-    //Debug
-    public bool EnableDebug = false;
+    public HexGridManager InitHexGridManager(int rows, int columns)
+    {
+        Rows = rows;
+        Columns = columns;
+        return this;
+    }
+
+    void Awake()
+    {
+        HexTilePrefab = Resources.Load("Prefabs/HexTile") as GameObject;
+    }
 
     void Start()
     {
         _hexGridArray = GenerateHexGrid(Rows, Columns);
+        ToggleDebug(false);
     }
 
     void Update()
@@ -50,15 +60,25 @@ public class HexGridManager : MonoBehaviour
                 // Set tile coords
                 HexTile hexTile = hexTileObject.GetComponent<HexTile>();
                 hexTile.SetCoords(q - Mathf.Floor(r/2),r);
-                // Debug
-                if(EnableDebug)
-                {
-                    hexTileObject.transform.Find("Canvas/CoordText").GetComponent<TMP_Text>().SetText(hexTile.GetCoords().x + "," + hexTile.GetCoords().y);
-                }
                 // Reference for storage: https://www.redblobgames.com/grids/hexagons/#map-storage
                 hexGrid[r,q] = hexTile;
             }
         }
         return hexGrid;
+    }
+
+        public void ToggleDebug(bool enabled)
+    {
+        foreach (var tile in _hexGridArray)
+        {
+            if(enabled)
+            {
+                tile.transform.Find("Canvas/CoordText").GetComponent<TMP_Text>().SetText(tile.GetCoords().x + "," + tile.GetCoords().y);
+            }
+            else
+            {
+                tile.transform.Find("Canvas/CoordText").GetComponent<TMP_Text>().SetText("");
+            }
+        }
     }
 }
