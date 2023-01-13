@@ -11,6 +11,10 @@ public class BoardManager : MonoBehaviour
     private bool _enableDebug = false;
     public bool EnableDebug = false;
 
+    // Players
+    private Player _homePlayer;
+    private Player _awayPlayer;
+
     // HexGrid
     public int HexGridRows;
     public int HexGridColumns;
@@ -20,13 +24,12 @@ public class BoardManager : MonoBehaviour
 
     void Awake()
     {
-        NullCheck();
+        InitComponents();
     }
 
     void Start()
     {
-        InitHexGrid();
-        InitBench();
+
     }
 
     void Update()
@@ -34,22 +37,48 @@ public class BoardManager : MonoBehaviour
         IsDebugEnabled();
     }
 
-    private void NullCheck()
-    {
-        Debug.Assert(_benchManager == null, "[BoardManager] BenchManager is null");
-        Debug.Assert(_hexGridManager == null, "[BoardManager] HexGridManager is null");
-    }
-
     #region Init
+
+    private void InitComponents()
+    {
+        InitHexGrid();
+        InitBench();
+    }
 
     private void InitHexGrid()
     {
         _hexGridManager = gameObject.AddComponent<HexGridManager>().InitHexGridManager(HexGridRows, HexGridColumns);
+        Debug.Assert(_hexGridManager != null, "[BoardManager] HexGridManager is null");
     }
 
     private void InitBench()
     {
         _benchManager = gameObject.AddComponent<BenchManager>().InitBenchManager(BenchSize);
+        Debug.Assert(_benchManager != null, "[BoardManager] BenchManager is null");
+    }
+
+    #endregion
+
+        #region Players
+
+    public void SetHomePlayer(Player homePlayer)
+    {
+        _homePlayer = homePlayer;
+    }
+
+    public Player GetHomePlayer()
+    {
+        return _homePlayer;
+    }
+
+    public void SetAwayPlayer(Player awayPlayer)
+    {
+        _awayPlayer = awayPlayer;
+    }
+
+    public Player GetAwayPlayer()
+    {
+        return _awayPlayer;
     }
 
     #endregion
