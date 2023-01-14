@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BoardManager : MonoBehaviour
 {
-    private HexGridManager _hexGridManager;
-    private BenchManager _benchManager;
+    public HexGridManager _hexGridManager;
+    public BenchManager _benchManagerHome;
+    public BenchManager _benchManagerAway;
 
     //Debug
     private bool _enableDebug = false;
@@ -14,18 +15,6 @@ public class BoardManager : MonoBehaviour
     // Players
     private Player _homePlayer;
     private Player _awayPlayer;
-
-    // HexGrid
-    public int HexGridRows;
-    public int HexGridColumns;
-
-    // Bench
-    public int BenchSize;
-
-    void Awake()
-    {
-        InitComponents();
-    }
 
     void Start()
     {
@@ -37,29 +26,7 @@ public class BoardManager : MonoBehaviour
         IsDebugEnabled();
     }
 
-    #region Init
-
-    private void InitComponents()
-    {
-        InitHexGrid();
-        InitBench();
-    }
-
-    private void InitHexGrid()
-    {
-        _hexGridManager = gameObject.AddComponent<HexGridManager>().InitHexGridManager(HexGridRows, HexGridColumns);
-        Debug.Assert(_hexGridManager != null, "[BoardManager] HexGridManager is null");
-    }
-
-    private void InitBench()
-    {
-        _benchManager = gameObject.AddComponent<BenchManager>().InitBenchManager(BenchSize);
-        Debug.Assert(_benchManager != null, "[BoardManager] BenchManager is null");
-    }
-
-    #endregion
-
-        #region Players
+    #region Players
 
     public void SetHomePlayer(Player homePlayer)
     {
@@ -95,6 +62,7 @@ public class BoardManager : MonoBehaviour
     public void ToggleDebug(bool enabled)
     {
         _hexGridManager.ToggleDebug(enabled);
-        _benchManager.ToggleDebug(enabled);
+        _benchManagerHome.ToggleDebug(enabled);
+        _benchManagerAway.ToggleDebug(enabled);
     }
 }
