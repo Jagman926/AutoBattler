@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Economy : MonoBehaviour
+public class Economy : PlayerComponent
 {
     private int _gold;
 
@@ -17,7 +17,7 @@ public class Economy : MonoBehaviour
     private int _streak4 = 2;
     private int _streak5Plus = 3;
 
-    public Economy InitEconomy(int startingGold)
+    public Economy Init(int startingGold)
     {
         _gold = startingGold;
         return this;
@@ -73,6 +73,25 @@ public class Economy : MonoBehaviour
         {
             return _streak5Plus;
         }
+    }
+
+    #endregion
+
+    #region Rounds
+
+    public override void OnRoundStart()
+    {
+
+    }
+
+    public override void OnPreperationStart()
+    {
+        AddGold(_passiveIncome);
+    }
+
+    public override void OnPreperationEnd()
+    {
+        
     }
 
     #endregion
