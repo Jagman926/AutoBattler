@@ -74,12 +74,17 @@ public class Health : PlayerComponent
 
     }
 
-    public override void OnPreperationStart()
+    public override void OnRoundEnd()
+    {
+        
+    }
+
+    public override void OnPreparationStart()
     {
 
     }
 
-    public override void OnPreperationEnd()
+    public override void OnPreparationEnd()
     {
         
     }

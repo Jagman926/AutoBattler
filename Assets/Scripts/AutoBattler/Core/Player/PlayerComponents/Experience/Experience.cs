@@ -109,12 +109,17 @@ public class Experience : PlayerComponent
 
     }
 
-    public override void OnPreperationStart()
+    public override void OnRoundEnd()
+    {
+        
+    }
+
+    public override void OnPreparationStart()
     {
         GainExperience(_passiveExperience);
     }
 
-    public override void OnPreperationEnd()
+    public override void OnPreparationEnd()
     {
         
     }

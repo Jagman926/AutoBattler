@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        InitComponents();
+        Init();
     }
 
     void Start()
@@ -31,6 +31,11 @@ public class Player : MonoBehaviour
 
     #region Init
 
+    private void Init()
+    {
+        InitComponents();
+    }
+
     private void InitComponents()
     {
         InitEconomy();
@@ -41,19 +46,19 @@ public class Player : MonoBehaviour
     private void InitEconomy()
     {
         _economy = gameObject.AddComponent<Economy>().Init(0);
-        Debug.Assert(_economy == null, "[Player] Economy is null");
+        Debug.Assert(_economy != null, "[Player] Economy is null");
     }
 
     private void InitHealth()
     {
         _health = gameObject.AddComponent<Health>().Init();
-        Debug.Assert(_health == null, "[Player] Health is null");
+        Debug.Assert(_health != null, "[Player] Health is null");
     }
 
     private void InitExperience()
     {
         _experience = gameObject.AddComponent<Experience>().Init();
-        Debug.Assert(_experience == null, "[Player] Experience is null");
+        Debug.Assert(_experience != null, "[Player] Experience is null");
     }
 
     #endregion

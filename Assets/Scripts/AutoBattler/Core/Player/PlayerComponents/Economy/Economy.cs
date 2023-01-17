@@ -84,12 +84,17 @@ public class Economy : PlayerComponent
 
     }
 
-    public override void OnPreperationStart()
+    public override void OnRoundEnd()
+    {
+        
+    }
+
+    public override void OnPreparationStart()
     {
         AddGold(_passiveIncome);
     }
 
-    public override void OnPreperationEnd()
+    public override void OnPreparationEnd()
     {
         
     }
